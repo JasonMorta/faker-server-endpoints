@@ -10,7 +10,7 @@ const corsOptions = { origin: "*" };
 app.use(cors(corsOptions));
 const port = process.env.PORT || 3003
 /* ===========================DB Connection============================= */
-
+console.log('Starting')
 //* Connect to DB
 // const URL = ''
 // const dbConnection = mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -28,9 +28,11 @@ app.get('/', (req, res) => {
 
 require('./routes/basicUser')(app);
 require('./routes/accountSummaryUsers')(app);
+require('./routes/accountSummaryPaginatedRoute')(app);
+require('./routes/accountSummaryStream')(app);
 
 /* ===========================Port Listener============================= */
-app.listen(port, () => console.log(`Listening on port port!`))
+app.listen(port, () => console.log(`Listening on port port ${port}!`))
 
 
 /* npm installs

@@ -1,9 +1,9 @@
 const { faker } = require('@faker-js/faker');
 
 const from = "2000/1/1";
-    const to = "2024/4/3";
-    const createRandomUser = () => {
-      return {
+const to = "2024/4/3";
+const createRandomUser = () => {
+    return {
         // summary table
         login: faker.string.numeric(7),
         deposit: faker.finance.amount(),
@@ -17,9 +17,9 @@ const from = "2000/1/1";
         currentEquity: faker.finance.amount(),
         margin: faker.finance.amount(),
         currency: faker.finance.currencyCode(),
-        
-        
-    
+
+
+
         //overview tab
         name: faker.person.firstName(),
         lastName: faker.person.lastName(),
@@ -38,10 +38,10 @@ const from = "2000/1/1";
         languages: ['English', 'Afrikaans', 'French'],
         statuses: ['Active', 'Inactive', 'Pending'],
         countries: ['USA', 'Canada', 'SA'],
-        company: faker.company.name() ,
+        company: faker.company.name(),
         id: faker.string.uuid(),
 
-    
+
         //running trades
         symbol: 'EURUSD',
         stopLoss: faker.finance.amount(),
@@ -52,35 +52,55 @@ const from = "2000/1/1";
         type: 'Buy',
         openPrice: faker.finance.amount(),
         price: faker.finance.amount(),
-    
+
         // OverView table totals
         totals: {
-          deposit: faker.finance.amount(),
-          withdraw: faker.finance.amount(),
-          inOut: faker.finance.amount(),
-          credit: faker.finance.amount(),
-          swaps: faker.finance.amount(),
-          additional: faker.finance.amount(),
-          volume: faker.finance.amount(),
-          commission: faker.finance.amount(),
-          fee: faker.finance.amount(),
-          profit: faker.finance.amount(),
-          currentBalance: faker.finance.amount(),
-          currentEquity: faker.finance.amount(),
-          margin: faker.finance.amount(),
+            deposit: faker.finance.amount(),
+            withdraw: faker.finance.amount(),
+            inOut: faker.finance.amount(),
+            credit: faker.finance.amount(),
+            swaps: faker.finance.amount(),
+            additional: faker.finance.amount(),
+            volume: faker.finance.amount(),
+            commission: faker.finance.amount(),
+            fee: faker.finance.amount(),
+            profit: faker.finance.amount(),
+            currentBalance: faker.finance.amount(),
+            currentEquity: faker.finance.amount(),
+            margin: faker.finance.amount(),
         }
-      };
     };
-      const generatedUsers = faker.helpers.multiple(createRandomUser, {
-            count: 250000,
-      });
+};
+// const generatedUsers = faker.helpers.multiple(createRandomUser, {
+//     count: 1,
+// });
+
+// Function to generate a large number of random user accounts
+const generateUsersArray = (count) => {
+    const users = [];
+    for (let i = 0; i < count; i++) {
+        const account = createRandomUser();
+        users.push(account);
+    }
+    return users;
+};
 
 
-exports.accountSummaryUsers = async (req, res) => {
-  console.log('processing request for accountSummaryUsers')
+exports.accountSummaryStream = async (req, res) => {
+    console.log('processing request for accountSummaryStream')
+    const totalUsers = 1000000; // Example: total number of user accounts
+    const pageSize = 1000; // Example: number of user accounts to send in each chunk
+    const totalPages = Math.ceil(totalUsers / pageSize);
 
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Transfer-Encoding', 'chunked');
 
-    
-    
-      res.json(generatedUsers);
+    // Send user accounts in chunks
+    for (let page = 1; page <= totalPages; page++) {
+        const users = generateUsersArray(pageSize);
+        res.write(JSON.stringify(users));
+    }
+
+    res.end();
+    console.log('Stream completed');
 };
