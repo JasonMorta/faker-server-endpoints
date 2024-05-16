@@ -1,7 +1,8 @@
 const { faker } = require('@faker-js/faker');
-
+console.log('Controller accountSummaryStream.js hit🎮');
 const from = "2000/1/1";
 const to = "2024/4/3";
+
 const createRandomUser = () => {
     return {
         // summary table
@@ -18,9 +19,7 @@ const createRandomUser = () => {
         margin: faker.finance.amount(),
         currency: faker.finance.currencyCode(),
 
-
-
-        //overview tab
+        // overview tab
         name: faker.person.firstName(),
         lastName: faker.person.lastName(),
         accountNumber: faker.string.numeric(10),
@@ -30,9 +29,7 @@ const createRandomUser = () => {
         metaQuotesID: faker.string.numeric(10),
         email: faker.internet.email(),
         country: faker.location.country(),
-        // registered: faker.date.between({ from, to }).toLocaleDateString(), //DD/MM/YYYY format
-        // lastAccess: faker.date.between({ from, to }).toLocaleDateString(),
-        registered: faker.date.between({ from, to }).toISOString().split('T')[0], // required format fro input is YYYY-MM-DD
+        registered: faker.date.between({ from, to }).toISOString().split('T')[0], // required format for input is YYYY-MM-DD
         lastAccess: faker.date.between({ from, to }).toISOString().split('T')[0],
         lastIPAddress: faker.internet.ip(),
         languages: ['English', 'Afrikaans', 'French'],
@@ -41,8 +38,7 @@ const createRandomUser = () => {
         company: faker.company.name(),
         id: faker.string.uuid(),
 
-
-        //running trades
+        // running trades
         symbol: 'EURUSD',
         stopLoss: faker.finance.amount(),
         swaps: faker.finance.amount(),
@@ -71,36 +67,28 @@ const createRandomUser = () => {
         }
     };
 };
-// const generatedUsers = faker.helpers.multiple(createRandomUser, {
-//     count: 1,
-// });
 
 // Function to generate a large number of random user accounts
-const generateUsersArray = (count) => {
-    const users = [];
-    for (let i = 0; i < count; i++) {
-        const account = createRandomUser();
-        users.push(account);
-    }
-    return users;
-};
+const generatedUsers = faker.helpers.multiple(createRandomUser, {
+    count: 400000,
+});
 
 
 exports.accountSummaryStream = async (req, res) => {
-    console.log('processing request for accountSummaryStream')
-    const totalUsers = 1000000; // Example: total number of user accounts
-    const pageSize = 1000; // Example: number of user accounts to send in each chunk
-    const totalPages = Math.ceil(totalUsers / pageSize);
+    console.log('processing request for accountSummaryUsers');
 
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Transfer-Encoding', 'chunked');
+    const batchSize = 1000; // Adjust batch size as needed
+    const totalUsers = 400000;
+    const numBatches = Math.ceil(totalUsers / batchSize);
+    console.log(`Sending ${totalUsers} users to the client in ${numBatches} batches`);
 
-    // Send user accounts in chunks
-    for (let page = 1; page <= totalPages; page++) {
-        const users = generateUsersArray(pageSize);
-        res.write(JSON.stringify(users));
+    for (let i = 0; i < numBatches; i++) {
+        const start = i * batchSize;
+        const end = Math.min((i + 1) * batchSize, totalUsers);
+        const usersBatch = generatedUsers.slice(start, end);
+        res.write(JSON.stringify(usersBatch));
     }
 
     res.end();
-    console.log('Stream completed');
+    console.log('Request processed successfully!');
 };
