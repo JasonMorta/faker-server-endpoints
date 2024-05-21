@@ -1,6 +1,10 @@
 const { faker } = require('@faker-js/faker');
 console.log('Controller accountSummaryStream.js hit🎮');
-const from = "2000/1/1";
+
+
+
+exports.accountSummaryStream = async (req, res) => {
+    const from = "2000/1/1";
 const to = "2024/4/3";
 
 const createRandomUser = () => {
@@ -72,9 +76,6 @@ const createRandomUser = () => {
 const generatedUsers = faker.helpers.multiple(createRandomUser, {
     count: 400000,
 });
-
-
-exports.accountSummaryStream = async (req, res) => {
     console.log('processing request for accountSummaryUsers');
 
     const batchSize = 1000; // Adjust batch size as needed

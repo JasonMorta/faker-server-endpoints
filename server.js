@@ -14,7 +14,7 @@ console.log('Starting server...')
 //* Connect to DB
 
 
-// require('./routes/basicUser')(app);
+require('./routes/basicUser')(app);
 require('./routes/accountSummaryUsers')(app);
 //require('./routes/accountSummaryPaginatedRoute')(app);
 require('./routes/accountSummaryStream')(app);
