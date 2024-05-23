@@ -18,6 +18,7 @@ require('./routes/basicUser')(app);
 require('./routes/accountSummaryUsers')(app);
 //require('./routes/accountSummaryPaginatedRoute')(app);
 require('./routes/accountSummaryStream')(app);
+require('./routes/update_user')(app);
 
 /* ===========================Port Listener============================= */
 app.listen(process.env.PORT || 3003, () => {
