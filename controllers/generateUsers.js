@@ -18,7 +18,10 @@ const createRandomUser = () => {
     currentBalance: parseFloat(faker.finance.amount(formatting)),
     currentEquity: parseFloat(faker.finance.amount(formatting)),
     margin: parseFloat(faker.finance.amount(formatting)),
-    currency: faker.finance.currencyCode(),
+    currencies: {
+      zar: parseFloat(faker.finance.amount(formatting)),
+      usd: parseFloat(faker.finance.amount(formatting)),
+    },
 
     // overview tab
     name: faker.person.firstName(),
