@@ -1,4 +1,5 @@
 const { faker } = require('@faker-js/faker');
+const e = require('cors');
 
 const from = "2000/1/1";
 const to = "2024/4/3";
@@ -19,6 +20,50 @@ const createRandomUser = () => {
     currentEquity: parseFloat(faker.finance.amount(formatting)),
     margin: parseFloat(faker.finance.amount(formatting)),
     currency: faker.finance.currencyCode(),
+
+    //Limits
+    showToRegularManagers: faker.datatype.boolean(),
+    serverReports: faker.datatype.boolean(),
+    dailyReports: faker.datatype.boolean(),
+    apiConnections: faker.datatype.boolean(),
+    sponsored_VPS_Hosting: faker.datatype.boolean(),
+    enableTrading: faker.datatype.boolean(),
+    algoTradingByExpertAdvisors: faker.datatype.boolean(),
+    trailingStops: faker.datatype.boolean(),
+    totalValueOfOpenPositionsVal: 'Default',
+    totalValueOfOpenPositions: ['Default', 1111],
+    numberOfActiveOrdersVal: 'Default',
+    numberOfActiveOrders: ['Default', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,],
+
+    //?? : check dropdown options
+    //balance tab
+    operation: ['Balance', 'Credit', 'Deposit', 'Withdrawal', 'Commission', 'Fee', 'InOut'],
+    operationValue: 'Balance',
+    amount: ['', 100],
+    // comment: ['...pt your comment here...', 'Second Comment'],
+    commentValue: '...pt your comment here...',
+    // Conduct balance operation without checking the free margin and the correct balance on the account
+    conductBalanceCheck: faker.datatype.boolean(),
+    balances:[
+      {
+        dateAndTime: faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2024-05-01T00:00:00.000Z' }),
+        deal: faker.string.numeric(5),
+      },
+      {
+        dateAndTime:  faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2024-05-01T00:00:00.000Z' }),
+        deal: faker.string.numeric(5),
+      },
+      {
+        dateAndTime:  faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2024-05-01T00:00:00.000Z' }),
+        deal: faker.string.numeric(5),
+      }
+    ],
+    balancesValue: 0,
+    balanceTotals: {
+     balance: parseFloat(faker.finance.amount(formatting)),
+     equity: parseFloat(faker.finance.amount(formatting)),
+     free: parseFloat(faker.finance.amount(formatting)), //?? Free Margin?   
+    },
 
     // overview tab
     name: faker.person.firstName(),

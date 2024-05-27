@@ -42,6 +42,18 @@ const createRandomUser = () => {
         company: faker.company.name(),
         id: faker.string.uuid(),
 
+        //Limits
+        showToRegularManagers: faker.datatype.boolean(),
+        serverReports: faker.datatype.boolean(),
+        dailyReports: faker.datatype.boolean(),
+        apiConnections: faker.datatype.boolean(),
+        sponsored_VPS_Hosting: faker.datatype.boolean(),
+        enableTrading: faker.datatype.boolean(),
+        algoTradingByExpertAdvisors: faker.datatype.boolean(),
+        trailingStops: faker.datatype.boolean(),
+        totalValueOfOpenPositions: ['Default', 1111],
+        numberOfActiveOrders: ['Default', 1,2,3,4,5,6,7,8,9,10,],
+
         // running trades
         symbol: 'EURUSD',
         stopLoss: faker.finance.amount(),
