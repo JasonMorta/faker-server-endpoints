@@ -5,14 +5,15 @@ const { faker } = require('@faker-js/faker');
 
 exports.initialUser = async (req, res) => {
       console.log('got the request')
-      const requested = parseInt(req.query.count) || 10;
+      const requested = parseInt(req.query.count) || 9;
 
       const from = "2000/1/1";
       const to = "2024/4/3";
-
+      let id = 0;
       const userObject = () => {
+           
             return {
-                  id: faker.string.nanoid(3),
+                  id: id++,
                   firstName: faker.person.firstName(),
                   lastName: faker.person.lastName(),
                   fullName: faker.person.fullName(),
