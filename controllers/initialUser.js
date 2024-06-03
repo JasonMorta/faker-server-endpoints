@@ -35,7 +35,7 @@ exports.initialUser = async (req, res) => {
 
 
       try {
-
+            res.setHeader('Content-Type', 'application/json');
             res.status(200).json(generatedUsers);
 
       } catch (error) {
