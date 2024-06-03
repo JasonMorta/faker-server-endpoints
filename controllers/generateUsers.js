@@ -51,14 +51,20 @@ const createRandomUser = () => {
       {
         dateAndTime: faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2024-05-01T00:00:00.000Z' }),
         deal: faker.string.numeric(5),
+        type: 'Balance',
+        amount: parseFloat(faker.finance.amount(formatting)),
       },
       {
         dateAndTime:  faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2024-05-01T00:00:00.000Z' }),
         deal: faker.string.numeric(5),
+        type: 'Balance',
+        amount: parseFloat(faker.finance.amount(formatting)),
       },
       {
         dateAndTime:  faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2024-05-01T00:00:00.000Z' }),
         deal: faker.string.numeric(5),
+        type: 'Balance',
+        amount: parseFloat(faker.finance.amount(formatting)),
       }
     ],
     balancesValue: 0,
@@ -180,7 +186,7 @@ const generateUsersWithTotals = (count) => {
   return { users, totals };
 };
 
-const generatedUsers = generateUsersWithTotals(50000);
+const generatedUsers = generateUsersWithTotals(10000);
 
 module.exports = {
   generatedUsers
