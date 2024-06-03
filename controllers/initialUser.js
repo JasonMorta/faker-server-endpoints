@@ -11,7 +11,7 @@ exports.initialUser = async (req, res) => {
       const to = "2024/4/3";
       let id = 0;
       const userObject = () => {
-           
+
             return {
                   id: id++,
                   firstName: faker.person.firstName(),
@@ -35,9 +35,9 @@ exports.initialUser = async (req, res) => {
 
 
       try {
-      
-            res.status(200).send(generatedUsers);
-          
+
+            res.status(200).json(generatedUsers);
+
       } catch (error) {
             console.log('error', error)
             res.status(500).send({ message: error.message });
