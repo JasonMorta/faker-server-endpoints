@@ -20,6 +20,9 @@ require('./routes/accountSummaryUsers')(app);
 require('./routes/accountSummaryStream')(app);
 require('./routes/update_user')(app);
 require('./routes/hardUsersRoute')(app);
+require('./routes/superheroes')(app);
+require('./routes/superVillainsRoute')(app);
+require('./routes/paginatedQueryRoute')(app);
 
 /* ===========================Port Listener============================= */
 app.listen(process.env.PORT || 3003, () => {
