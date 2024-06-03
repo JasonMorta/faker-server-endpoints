@@ -13,6 +13,10 @@ app.use(cors(corsOptions));
 console.log('Starting server...')
 //* Connect to DB
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the fake server')
+})
+
 
 require('./routes/basicUser')(app);
 require('./routes/accountSummaryUsers')(app);
