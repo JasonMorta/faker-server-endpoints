@@ -27,10 +27,11 @@ require('./routes/hardUsersRoute')(app);
 require('./routes/superheroes')(app);
 require('./routes/superVillainsRoute')(app);
 require('./routes/paginatedQueryRoute')(app);
+require('./routes/loginRoute')(app);
 
 /* ===========================Port Listener============================= */
-app.listen(process.env.PORT || 3003, () => {
-    console.log(`Listening on port port 3003!`)
+app.listen(process.env.PORT || 3008, () => {
+    console.log(`===== Listening on port port 3008! =====`)
 })
 
 
