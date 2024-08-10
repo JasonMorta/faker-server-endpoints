@@ -5,7 +5,7 @@ const { faker } = require('@faker-js/faker');
 
 exports.initialUser = async (req, res) => {
       console.log('got the request')
-      const requested = parseInt(req.query.count) || 9;
+      const requested = parseInt(req.query.count) || 500;
 
       const from = "2000/1/1";
       const to = "2024/4/3";
