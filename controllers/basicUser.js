@@ -3,15 +3,13 @@ const { faker } = require('@faker-js/faker');
 
 
 
-exports.initialUser = async (req, res) => {
+exports.basicUser = async (req, res) => {
       console.log('got the request')
       const requested = parseInt(req.query.count) || 9;
 
-      const from = "2000/1/1";
-      const to = "2024/4/3";
       let id = 0;
-      const userObject = () => {
 
+      const userObject = () => {
             return {
                   id: id++,
                   firstName: faker.person.firstName(),
@@ -20,7 +18,17 @@ exports.initialUser = async (req, res) => {
 
                   //age between 21 and 100
                   age: parseInt(faker.string.numeric(2, { allowLeadingZeros: false })) % 80 + 21,
-
+                  email: faker.internet.email(),
+                  //object
+                  address: {
+                        street: faker.address.street(),
+                        city: faker.address.city(),
+                        state: faker.address.state(),
+                        zip: faker.address.zipCode(),
+                        country: faker.address.country()
+                  },
+                  //array
+                  favColors: [faker.color.human(), faker.color.human(), faker.color.human()],
 
             }
       };

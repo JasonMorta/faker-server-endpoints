@@ -186,7 +186,7 @@ const generateUsersWithTotals = (count) => {
   return { users, totals };
 };
 
-const generatedUsers = generateUsersWithTotals(10000);
+const generatedUsers = (count) => generateUsersWithTotals(count);
 
 module.exports = {
   generatedUsers

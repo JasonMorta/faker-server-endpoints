@@ -5,7 +5,7 @@ console.log('Controller accountSummaryStream.js hit🎮');
 
 exports.accountSummaryStream = async (req, res) => {
     const from = "2000/1/1";
-const to = "2024/4/3";
+    const to = "2024/4/3";
 
 const createRandomUser = () => {
     return {
