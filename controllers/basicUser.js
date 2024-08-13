@@ -5,7 +5,7 @@ const { faker } = require('@faker-js/faker');
 
 exports.basicUser = async (req, res) => {
       console.log('got the request')
-      const requested = parseInt(req.query.count) || 9;
+      const requested = parseInt(req.query.count) || 500;
 
       let id = 0;
 
